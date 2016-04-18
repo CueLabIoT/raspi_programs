@@ -87,26 +87,42 @@ else
         toiret_flag = 0
 end
 
-uri = URI.parse("http://ec2-52-192-215-250.ap-northeast-1.compute.amazonaws.com/server_post")
-response = nil
+lastflag = 0;
+File.open('openflag', "r+:utf-8" ) do |f|
+  while lastflag = f.gets
+        if lastflag.to_i == toiret_flag then
+         puts lastflag
+        else
+         puts "ステータスが変わったからステータスを送信するよ！"
+		uri = URI.parse("http://ec2-52-192-215-250.ap-northeast-1.compute.amazonaws.com/server_post")
+		response = nil
 
-request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+		request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
 
-http = Net::HTTP.new(uri.host, uri.port)
-http.set_debug_output $stderr
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.set_debug_output $stderr
 
-sdata = { 
-:type => "toiret",
-:toiret_floor => "10F" ,
-:toiret_num => "0" ,
-:distance => distance,
-:flag => toiret_flag ,
-:datetime => datetime_string
-}.to_json
-request.body = sdata
+		sdata = { 
+		:type => "toiret",
+		:toiret_floor => "15F" ,
+		:toiret_num => "0" ,
+		:distance => distance,
+		:flag => toiret_flag ,
+		:datetime => datetime_string
+		}.to_json
+		request.body = sdata
 
-http.start do |h|
-  response = http.request(request)
+		http.start do |h|
+		  response = http.request(request)
+		end
+	end
+  end
+   puts toiret_flag
+   f.flock(File::LOCK_EX)
+   body = toiret_flag
+   f.rewind
+   f.puts body
+   f.truncate(f.tell)
 end
 
 
