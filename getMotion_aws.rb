@@ -22,13 +22,12 @@ include PiPiper
 
 
 endTime = Time.now 
+flag = 0
 
 watch :pin => 17 do
 	t = Time.now
         strTime = t.strftime("%Y%m%d%H%M%S")
         strTimedate = t.strftime("%Y/%m/%d %H:%M:%S")
-
-	flag = 0
 
         #
         puts "t"
@@ -43,6 +42,7 @@ watch :pin => 17 do
                 puts ""
                 
 		puts "flag"
+		puts flag
                 puts ""
         
 	        if flag == 1 then
@@ -68,6 +68,7 @@ watch :pin => 17 do
 			http.start do |h|
 				response = http.request(request)
 			end
+
  			flag = 0
                         puts "flag"
                         puts flag
@@ -78,8 +79,8 @@ watch :pin => 17 do
 
 		end
           	
-	startTime = Time.now
-	endTime = startTime + 5
+		startTime = Time.now
+		endTime = startTime + 15
 		puts "setTimer"
 	else
 		puts "t < endTime"
@@ -87,6 +88,10 @@ watch :pin => 17 do
 
 #	puts "Pin change from #{last_value} to #{value}"
 #	puts system("sudo raspistill -w 480 -h 360 -n -o /work/img/#{strTime}.jpg")
+
+	flag = 1
+	puts "flag"
+	puts flag
 
 	puts "---------------------------------"
 
