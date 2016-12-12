@@ -24,7 +24,7 @@ pin.read
 
 	sdata = { 
 	:type => "toiret",
-	:toiret_floor => "10F_test" ,
+	:toiret_floor => "15F" ,
 	:toiret_num => "0" ,
 	:distance => "0",
 	:flag => pin.value,
