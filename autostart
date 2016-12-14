@@ -1,0 +1,6 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash
+@lxterminal --command "/work/autostart_wvdial.sh"
+@lxterminal --command "/work/autostart_toirets.sh"
+@point-rpi
