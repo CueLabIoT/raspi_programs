@@ -5,6 +5,7 @@ require 'pi_piper'
 
 include PiPiper
 
+fnum = "07"
 preTime1 = Time.now
 preTime2 = Time.now
 
@@ -32,7 +33,7 @@ loop do
 
         sdata = {
         :type => "toiret",
-        :toiret_floor => "6" ,
+        :toiret_floor => fnum ,
         :toiret_num => "0" ,
         :used_time => now_time1 - preTime1,
         :flag => pin1.value,
@@ -66,7 +67,7 @@ loop do
 
         sdata = {
         :type => "toiret",
-        :toiret_floor => "6" ,
+        :toiret_floor => fnum ,
         :toiret_num => "1" ,
         :used_time => now_time2 - preTime2,
         :flag => pin2.value,
