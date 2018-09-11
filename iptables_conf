@@ -6,12 +6,14 @@
 -A INPUT -m limit --limit 1/sec -j LOG --log-prefix "[IPTABLES INPUT]:"
 -A INPUT -p udp --dport 123 -j ACCEPT
 -A INPUT -p udp --sport 53 -j ACCEPT
+-A INPUT -p tcp --sport 443 -j ACCEPT
 -A INPUT -s 52.197.229.83/32 -j ACCEPT
 -A INPUT -p icmp -j ACCEPT
 -A FORWARD -m limit --limit 1/sec -j LOG --log-prefix "[IPTABLES FORWARD]:"
 -A OUTPUT -p udp --sport 123 -j ACCEPT
 -A OUTPUT -p udp --dport 53 -j ACCEPT
 -A OUTPUT -d 52.197.229.83/32 -j ACCEPT
+-A OUTPUT -p tcp --dport 443 -j ACCEPT
 -A OUTPUT -p icmp -j ACCEPT
 COMMIT
 # Completed on Mon May  1 14:18:03 2017

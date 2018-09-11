@@ -5,7 +5,7 @@ require 'pi_piper'
 
 include PiPiper
 
-fnum = "06"
+fnum = "07"
 preTime1 = Time.now
 preTime2 = Time.now
 
